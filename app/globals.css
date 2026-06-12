@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-border-primary: #EAEAEA;
+  --color-border-hover: #111111;
+  --color-bg-hover: #F5F5F7;
+  
+  --font-cormorant: var(--font-cormorant), serif;
+  --font-sans: var(--font-dm-sans), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+}
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #000000;
+  --secondary: #666666;
+  --border: #EAEAEA;
+  --border-hover: #111111;
+  --bg-hover: #F5F5F7;
+}
+
+/* Standard Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFFFFF;
+}
+::-webkit-scrollbar-thumb {
+  background: #EAEAEA;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #666666;
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+  cursor: auto !important; /* Restore standard cursor */
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ensure inputs, links, and buttons use standard cursors */
+a, button, input, select, textarea, [role="button"] {
+  cursor: pointer !important;
+}
+
+/* Clean Typography Hierarchy */
+h1, h2, h3, h4 {
+  font-family: var(--font-cormorant);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Underline slide on hover (in black) */
+.minimal-underline {
+  position: relative;
+}
+.minimal-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--foreground);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.minimal-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
+/* ── Project Card ── */
+.project-card {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease;
+}
+.project-card:hover {
+  transform: translateY(-3px);
+}
