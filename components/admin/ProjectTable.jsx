@@ -23,7 +23,7 @@ export default function ProjectTable({ projects, onRefresh, onEdit }) {
       return 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=150&auto=format&fit=crop';
     }
     if (url.startsWith('/uploads/')) {
-      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'https://portfolio-backend-4y2o.onrender.com/api';
       const rootBase = apiBase.replace('/api', '');
       return `${rootBase}${url}`;
     }

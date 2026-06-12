@@ -100,7 +100,7 @@ export default function ResumeManager() {
                   Last updated: {new Date(currentResume.updatedAt).toLocaleDateString()}
                 </p>
                 <a 
-                  href={`${process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL.replace('/api', '') : 'http://localhost:5000'}${currentResume.fileUrl}`} 
+                  href={`${process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL.replace('/api', '') : 'https://portfolio-backend-4y2o.onrender.com'}${currentResume.fileUrl}`} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-block mt-3 text-xs font-medium text-[#000000] underline underline-offset-2 hover:text-[#555555]"

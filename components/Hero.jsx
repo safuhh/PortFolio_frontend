@@ -13,7 +13,7 @@ export default function Hero() {
       try {
         const res = await getResume();
         if (res.data && res.data.fileUrl) {
-          const baseUrl = process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL.replace('/api', '') : 'http://localhost:5000';
+          const baseUrl = process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL.replace('/api', '') : 'https://portfolio-backend-4y2o.onrender.com';
           setCvUrl(`${baseUrl}${res.data.fileUrl}`);
         }
       } catch (err) {
