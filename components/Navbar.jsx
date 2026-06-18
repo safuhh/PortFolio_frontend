@@ -36,12 +36,12 @@ export default function Navbar() {
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
           scrolled
             ? 'py-4 bg-white/95 border-b border-[#E8E8E8] shadow-sm backdrop-blur-md'
-            : 'py-6 bg-transparent border-b border-transparent'
+            : 'py-6 bg-gradient-to-b from-black/60 via-black/20 to-transparent border-b border-transparent pointer-events-none'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between pointer-events-auto">
           {/* Logo */}
-          <Link href="/" className="font-sans font-bold text-lg tracking-widest text-[#000000] hover:opacity-75 transition-opacity duration-300">
+          <Link href="/" className={`font-sans font-bold text-lg tracking-widest hover:opacity-75 transition-colors duration-300 ${scrolled ? 'text-[#000000]' : 'text-white'}`}>
             SAFVAN
           </Link>
 
@@ -51,10 +51,10 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="font-dm-sans text-xs uppercase tracking-widest text-[#6B6B6B] hover:text-[#0A0A0A] transition-colors relative py-2 group"
+                className={`font-dm-sans text-xs uppercase tracking-widest transition-colors relative py-2 group ${scrolled ? 'text-[#6B6B6B] hover:text-[#0A0A0A]' : 'text-gray-300 hover:text-white'}`}
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#0A0A0A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                <span className={`absolute bottom-0 left-0 w-full h-[1px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ${scrolled ? 'bg-[#0A0A0A]' : 'bg-white'}`} />
               </Link>
             ))}
           </nav>
@@ -62,7 +62,7 @@ export default function Navbar() {
           {/* Mobile Hamburguer Toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-[#0A0A0A] hover:opacity-70 transition-opacity p-2"
+            className={`md:hidden hover:opacity-70 transition-colors p-2 ${scrolled ? 'text-[#0A0A0A]' : 'text-white'}`}
             aria-label="Toggle Menu"
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}

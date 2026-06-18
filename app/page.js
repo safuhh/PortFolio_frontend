@@ -10,9 +10,11 @@ export default function Home() {
     <>
       <Hero />
       <About />
-      <Skills />
-      <Projects />
-      <Contact />
+      <div className="relative z-20 bg-white">
+        <Skills />
+        <Projects />
+        <Contact />
+      </div>
     </>
   );
 }

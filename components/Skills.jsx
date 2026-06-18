@@ -1,165 +1,92 @@
 'use client';
-import { motion } from 'framer-motion';
-import { 
-  ReactIcon,
-  NextjsIcon,
-  JavascriptIcon,
-  TypescriptIcon,
-  NodejsIcon,
-  ExpressjsIcon,
-  MongodbIcon,
-  ReduxIcon,
-  TailwindIcon,
-  BootstrapIcon,
-  FramerMotionIcon,
-
-  RestApiIcon,
-  WebsocketsIcon,
-  JwtIcon,
-  MongooseIcon,
-  Github,
-  PostmanIcon,
-  FigmaIcon,
-  VercelIcon,
-  NetlifyIcon,
-  RagIcon,
-  AwsIcon,
-  CloudflareIcon,
-  DockerIcon,
-  AzureIcon
-} from '@/components/Icons';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import DomeGallery from './DomeGallery';
+import MobileSkills from './MobileSkills';
 
 export default function Skills() {
+  const sectionRef = useRef(null);
+  
+  // Track scroll for the outro effect when moving to the next section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
 
-  const groups = [
-    {
-      label: 'Frontend',
-      skills: [
-        { name: 'React.js', icon: ReactIcon },
-        { name: 'Next.js', icon: NextjsIcon },
-        { name: 'JavaScript', icon: JavascriptIcon },
-        { name: 'TypeScript', icon: TypescriptIcon },
-        { name: 'Redux Toolkit', icon: ReduxIcon },
-        { name: 'Tailwind CSS', icon: TailwindIcon },
-        { name: 'Bootstrap 5', icon: BootstrapIcon },
-        { name: 'Framer Motion', icon: FramerMotionIcon },
-
-      ],
-    },
-    {
-      label: 'Backend',
-      skills: [
-        { name: 'Node.js', icon: NodejsIcon },
-        { name: 'Express.js', icon: ExpressjsIcon },
-        { name: 'MongoDB', icon: MongodbIcon },
-        { name: 'Mongoose', icon: MongooseIcon },
-        { name: 'REST APIs', icon: RestApiIcon },
-        { name: 'WebSockets', icon: WebsocketsIcon },
-        { name: 'JWT Auth', icon: JwtIcon },
-        { name: 'RAG System', icon: RagIcon },
-      ],
-    },
-    {
-      label: 'Cloud & DevOps',
-      skills: [
-        { name: 'AWS', icon: AwsIcon },
-        { name: 'Cloudflare', icon: CloudflareIcon },
-        { name: 'Docker', icon: DockerIcon },
-        { name: 'Azure', icon: AzureIcon },
-      ],
-    },
-    {
-      label: 'Tools & Design',
-      skills: [
-        { name: 'Git & GitHub', icon: Github },
-        { name: 'Postman', icon: PostmanIcon },
-        { name: 'Figma', icon: FigmaIcon },
-        { name: 'Vercel', icon: VercelIcon },
-        { name: 'Netlify', icon: NetlifyIcon },
-      ],
-    },
-  ];
-
-  const fadeUp = {
-    initial: { opacity: 0, y: 16 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: '-80px' },
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  };
+  // Outro effects: as we scroll past this section, it fades out and scales down slightly
+  const opacity = useTransform(scrollYProgress, [0.6, 1], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0.6, 1], [1, 0.95]);
 
   return (
-    <section id="skills" className="py-20 sm:py-24 bg-white border-t border-[#EAEAEA]">
-      <div className="max-w-6xl mx-auto px-5 sm:px-6">
-
-        {/* Section Header */}
-        <motion.div {...fadeUp} className="mb-14 sm:mb-16">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-[#6B6B6B]">
-            Capabilities
-          </span>
-          <h2 className="font-sans font-semibold text-3xl sm:text-4xl text-[#000000] tracking-tight mt-2">
-            Technical Expertise
-          </h2>
-          <div className="w-12 h-[1px] bg-[#000000] mt-4" />
-        </motion.div>
-
-        {/* Skill Groups */}
-        <div className="space-y-12">
-          {groups.map((group, groupIdx) => (
-            <motion.div
-              key={group.label}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.55, delay: groupIdx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+    <section 
+      id="skills" 
+      ref={sectionRef}
+      className="relative pt-24 sm:pt-32 bg-transparent overflow-hidden flex flex-col border-t border-black/5"
+    >
+      {/* Wrapping the content in the scroll-linked motion.div for the outro effect */}
+      <motion.div style={{ opacity, scale }} className="w-full relative z-10 flex flex-col items-center pb-10">
+        
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 w-full relative z-10">
+          
+          {/* Section Header */}
+          <div className="mb-10 text-center flex flex-col items-center">
+            
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="font-mono text-xs uppercase tracking-[0.4em] text-zinc-500 mb-6 block"
             >
-              {/* Group Label */}
-              <div className="flex items-center gap-3 mb-5">
-                <h3 className="font-sans font-medium text-sm text-[#000000] tracking-tight">
-                  {group.label}
-                </h3>
-                <div className="flex-1 h-px bg-[#EEEEEE]" />
-              </div>
+              What I Bring To The Table
+            </motion.span>
+            
+          <motion.h2
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8 }}
+  className="font-sans text-5xl sm:text-7xl md:text-8xl font-black tracking-[-0.04em] leading-[1.05]"
+>
+  <span className="block text-black">
+    The Stack Behind
+  </span>
+  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-black via-zinc-700 to-zinc-400">
+    Every Build
+  </span>
+</motion.h2>
+            
+          
+            
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "120px" }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.4 }}
+              className="h-[1px] bg-gradient-to-r from-transparent via-black/20 to-transparent mt-12"
+            />
 
-              {/* Skills Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                {group.skills.map((skill, idx) => {
-                  const IconComponent = skill.icon;
-                  return (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                      className="group flex items-center gap-3 px-4 py-3.5
-                                 bg-[#FAFAFA] border border-[#EBEBEB] rounded-xl
-                                 hover:bg-white hover:border-[#D0D0D0]
-                                 transition-all duration-300 cursor-default select-none"
-                    >
-                      {/* Icon */}
-                      <div className="w-8 h-8 rounded-lg bg-white border border-[#E8E8E8]
-                                      flex items-center justify-center shrink-0
-                                      text-[#555555] group-hover:text-[#111111]
-                                      group-hover:border-[#D0D0D0]
-                                      transition-all duration-300">
-                        <IconComponent size={15} />
-                      </div>
-
-                      {/* Name */}
-                      <span className="font-sans font-medium text-[13px] text-[#333333]
-                                       group-hover:text-[#111111]
-                                       transition-colors duration-300 tracking-tight leading-tight">
-                        {skill.name}
-                      </span>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          ))}
+          </div>
         </div>
 
-      </div>
+        {/* Desktop Layout: Dome Gallery (Hidden on mobile) */}
+        <div className="hidden md:flex relative w-full h-[60vh] sm:h-[70vh] items-center justify-center mt-10">
+          <DomeGallery 
+            overlayBlurColor="transparent" 
+            grayscale={false}
+            minRadius={100}
+            fit={0.4}
+            autoRotate={true}
+            autoRotateSpeed={0.2}
+          />
+        </div>
+
+        {/* Mobile Layout: Separate Mobile Component (Hidden on desktop) */}
+        <div className="flex md:hidden w-full relative z-10 mt-4">
+          <MobileSkills />
+        </div>
+
+      </motion.div>
     </section>
   );
 }

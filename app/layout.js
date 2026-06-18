@@ -3,7 +3,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
-import PageLoader from '@/components/PageLoader';
+
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
       className={`${cormorant.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
     >
       <body className="antialiased bg-white selection:bg-[#000000] selection:text-white">
-        <PageLoader />
+
         <ScrollProgress />
         <Navbar />
         <main className="min-h-screen">
